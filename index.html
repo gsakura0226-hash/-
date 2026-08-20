@@ -203,18 +203,31 @@ function showPlants(list) {
 
         card.addEventListener("click", function() {
 
-    alert(
-        plant.name + "\n\n" +
-        "學名：" + plant.scientific + "\n" +
-        "科別：" + plant.family + "\n" +
-        "類型：" + plant.type + "\n\n" +
-        "📍 分布\n" +
-        (plant.distribution || "尚未建立資料") + "\n\n" +
-        "🔎 辨識特徵\n" +
-        (plant.features || "尚未建立資料") + "\n\n" +
-        "🪵 利用價值\n" +
-        (plant.use || "尚未建立資料")
-    );
+    document.getElementById("modalContent").innerHTML = `
+        <h1>${plant.name}</h1>
+
+        <p style="font-style:italic; color:#66736a;">
+            ${plant.scientific}
+        </p>
+
+        <p>
+            🌿 ${plant.family}　
+            🌳 ${plant.type}
+        </p>
+
+        <hr>
+
+        <h3>📍 分布</h3>
+        <p>${plant.distribution || "尚未建立資料"}</p>
+
+        <h3>🔎 辨識特徵</h3>
+        <p>${plant.features || "尚未建立資料"}</p>
+
+        <h3>🪵 利用價值</h3>
+        <p>${plant.use || "尚未建立資料"}</p>
+    `;
+
+    document.getElementById("plantModal").style.display = "block";
 
 });
 
@@ -253,6 +266,10 @@ search.addEventListener("input", function() {
 
 
 showPlants(plants);
+
+function closeModal() {
+    document.getElementById("plantModal").style.display = "none";
+}
 
 </script>
 <div id="plantModal" style="
