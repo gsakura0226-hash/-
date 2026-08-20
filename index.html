@@ -1,22 +1,227 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <title>台灣樹木圖鑑</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>台灣植物圖鑑</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f4f7f2;
+            color: #26352a;
+        }
+
+        header {
+            background: #315c3b;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        header p {
+            margin-top: 10px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 30px 20px;
+        }
+
+        .search {
+            width: 100%;
+            padding: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 16px;
+            margin-bottom: 25px;
+        }
+
+        .categories {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .category {
+            border: none;
+            padding: 10px 18px;
+            border-radius: 20px;
+            background: #dce9dd;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .category:hover {
+            background: #c4dbc7;
+        }
+
+        .plants {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        .card h2 {
+            margin-top: 0;
+        }
+
+        .scientific {
+            color: #66736a;
+            font-style: italic;
+        }
+
+        .tag {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 5px 10px;
+            background: #e4eee5;
+            border-radius: 10px;
+            font-size: 13px;
+        }
+    </style>
 </head>
 
 <body>
 
-    <h1>🌳 台灣樹木圖鑑</h1>
+<header>
+    <h1>🌿 台灣植物圖鑑</h1>
+    <p>認識台灣的植物，從一棵樹開始。</p>
+</header>
 
-    <h2>樟樹</h2>
+<div class="container">
 
-    <p>學名：Cinnamomum camphora</p>
-    <p>科別：樟科</p>
-    <p>分布：台灣低海拔地區</p>
+    <input
+        type="text"
+        id="search"
+        class="search"
+        placeholder="🔍 搜尋植物名稱、學名或科別..."
+    >
 
-    <h3>辨識特徵</h3>
-    <p>葉片具有特殊香氣，樹皮呈灰褐色。</p>
- 
+    <div class="categories">
+        <button class="category" onclick="filterPlants('全部')">全部</button>
+        <button class="category" onclick="filterPlants('木本')">🌳 木本</button>
+        <button class="category" onclick="filterPlants('草本')">🌱 草本</button>
+        <button class="category" onclick="filterPlants('蕨類')">🌿 蕨類</button>
+    </div>
+
+    <div class="plants" id="plants"></div>
+
+</div>
+
+<script>
+
+const plants = [
+    {
+        name: "樟樹",
+        scientific: "Cinnamomum camphora",
+        family: "樟科",
+        type: "木本"
+    },
+
+    {
+        name: "牛樟",
+        scientific: "Cinnamomum kanehirae",
+        family: "樟科",
+        type: "木本"
+    },
+
+    {
+        name: "紅檜",
+        scientific: "Chamaecyparis formosensis",
+        family: "柏科",
+        type: "木本"
+    },
+
+    {
+        name: "筆筒樹",
+        scientific: "Cyatheaceae",
+        family: "桫欏科",
+        type: "蕨類"
+    }
+];
+
+
+const container = document.getElementById("plants");
+const search = document.getElementById("search");
+
+
+function showPlants(list) {
+
+    container.innerHTML = "";
+
+    if (list.length === 0) {
+        container.innerHTML = "<p>找不到符合的植物 😭</p>";
+        return;
+    }
+
+    list.forEach(plant => {
+
+        const card = document.createElement("div");
+
+        card.className = "card";
+
+        card.innerHTML = `
+            <h2>${plant.name}</h2>
+            <div class="scientific">${plant.scientific}</div>
+            <p>${plant.family}</p>
+            <span class="tag">${plant.type}</span>
+        `;
+
+        container.appendChild(card);
+
+    });
+}
+
+
+function filterPlants(type) {
+
+    if (type === "全部") {
+        showPlants(plants);
+        return;
+    }
+
+    const result = plants.filter(plant => plant.type === type);
+
+    showPlants(result);
+}
+
+
+search.addEventListener("input", function() {
+
+    const keyword = search.value.toLowerCase();
+
+    const result = plants.filter(plant =>
+        plant.name.includes(keyword) ||
+        plant.scientific.toLowerCase().includes(keyword) ||
+        plant.family.includes(keyword)
+    );
+
+    showPlants(result);
+
+});
+
+
+showPlants(plants);
+
+</script>
+
 </body>
 </html>
