@@ -203,14 +203,20 @@ function showPlants(list) {
 
         card.addEventListener("click", function() {
 
-            alert(
-                plant.name + "\n\n" +
-                "學名：" + plant.scientific + "\n" +
-                "科別：" + plant.family + "\n" +
-                "類型：" + plant.type
-            );
+    alert(
+        plant.name + "\n\n" +
+        "學名：" + plant.scientific + "\n" +
+        "科別：" + plant.family + "\n" +
+        "類型：" + plant.type + "\n\n" +
+        "📍 分布\n" +
+        (plant.distribution || "尚未建立資料") + "\n\n" +
+        "🔎 辨識特徵\n" +
+        (plant.features || "尚未建立資料") + "\n\n" +
+        "🪵 利用價值\n" +
+        (plant.use || "尚未建立資料")
+    );
 
-        });
+});
 
         container.appendChild(card);
 
