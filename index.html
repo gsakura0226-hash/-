@@ -179,7 +179,7 @@ function showPlants(list) {
 
         card.className = "card";
 
-        card.innerHTML = `
+card.innerHTML = `
     <img src="${plant.image || ''}" alt="${plant.name}"
          style="width:100%; height:180px; object-fit:cover; border-radius:12px;">
 
@@ -190,7 +190,22 @@ function showPlants(list) {
     <p>${plant.family}</p>
 
     <span class="tag">${plant.type}</span>
+
+    <p style="margin-top:15px; color:#315c3b;">
+        👉 點擊查看詳細資料
+    </p>
 `;
+
+card.style.cursor = "pointer";
+
+card.addEventListener("click", function() {
+    alert(
+        plant.name + "\n\n" +
+        "學名：" + plant.scientific + "\n" +
+        "科別：" + plant.family + "\n" +
+        "類型：" + plant.type
+    );
+});
 
         container.appendChild(card);
 
