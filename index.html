@@ -255,6 +255,39 @@ search.addEventListener("input", function() {
 showPlants(plants);
 
 </script>
+<div id="plantModal" style="
+    display:none;
+    position:fixed;
+    z-index:1000;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+    overflow:auto;
+">
 
+    <div style="
+        background:white;
+        max-width:600px;
+        margin:50px auto;
+        padding:25px;
+        border-radius:20px;
+        width:85%;
+    ">
+
+        <button onclick="closeModal()" style="
+            float:right;
+            border:none;
+            background:none;
+            font-size:24px;
+            cursor:pointer;
+        ">✕</button>
+
+        <div id="modalContent"></div>
+
+    </div>
+
+</div>
 </body>
 </html>
