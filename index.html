@@ -96,11 +96,76 @@
             border-radius: 10px;
             font-size: 13px;
         }
+        .homeCategories {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.homeCategories button {
+    background: white;
+    border: none;
+    border-radius: 20px;
+    padding: 35px 20px;
+    font-size: 45px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.homeCategories button strong {
+    display: block;
+    margin-top: 10px;
+    font-size: 20px;
+    color: #315c3b;
+}
+
+.homeCategories button:hover {
+    transform: translateY(-3px);
+}
     </style>
+    
 </head>
 
 <body>
 
+<div id="homePage">
+
+    <header>
+        <h1>🌲 森林自然資源圖鑑</h1>
+        <p>認識台灣的植物、動物與木材</p>
+    </header>
+
+    <div class="container">
+
+        <div class="homeCategories">
+
+            <button onclick="openCategory('plants')">
+                🌿<br>
+                <strong>植物圖鑑</strong>
+            </button>
+
+            <button onclick="openCategory('animals')">
+                🐾<br>
+                <strong>動物圖鑑</strong>
+            </button>
+
+            <button onclick="openCategory('woods')">
+                🪵<br>
+                <strong>木材圖鑑</strong>
+            </button>
+
+            <button onclick="openCategory('favorites')">
+                ⭐<br>
+                <strong>我的最愛</strong>
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+<div id="plantPage" style="display:none;">
 <header>
     <h1>🌿 台灣植物圖鑑</h1>
     <p>認識台灣的植物，從一棵樹開始。</p>
@@ -124,6 +189,7 @@
 
     <div class="plants" id="plants"></div>
 
+</div>
 </div>
 
 <script>
@@ -269,6 +335,16 @@ showPlants(plants);
 
 function closeModal() {
     document.getElementById("plantModal").style.display = "none";
+}
+function openCategory(category) {
+
+    if (category === "plants") {
+
+        document.getElementById("homePage").style.display = "none";
+        document.getElementById("plantPage").style.display = "block";
+
+    }
+
 }
 
 </script>
